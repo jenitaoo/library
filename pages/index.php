@@ -1,11 +1,14 @@
 <?php
+/**
+ * Home page, prompts user for login if they aren't already and if they are, allows them to access the pages on the website
+ */
 session_start();
 
 require_once "..\configs\config.php";
 
 // Check if session started successfully
 if(isset($_SESSION["error"])){
-    echo"<p style='color:red'>Error </p>" . $_SESSION["error"];
+    echo"<p style='color:red'>" . $_SESSION["error"] . "</p>";
     unset($_SESSION["error"]);
 }
 ?>
@@ -25,12 +28,11 @@ if(isset($_SESSION["error"])){
 
 // Check the session, if user is not already logged in then provide link to login page
 if (!isset($_SESSION["username"])) { 
-    echo "Please <a href='pages/authentication/login.php'>Log In</a> to start.";
+    echo "Please <a href='login.php'>Log In</a> to start.";
 } // otherwise they're logged in, show them the links to other pages
 else { 
     require_once "../includes/header.php";
     echo "You're logged in!";
-    
 }
 
 

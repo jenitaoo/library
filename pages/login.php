@@ -1,8 +1,14 @@
 <?php
-require_once "..\configs\config.php";
-
+/**
+ * login page, allows users to login if they haven't already.
+ * if their login doesn't work, send them over to register an account
+ */
 // Start a session and unset any existing "username" session variable
 session_start();
+// unset session variable for username
+unset($_SESSION["username"]);
+
+require_once "..\configs\config.php";
 
 // Check session for errors
 // Display error message if set
@@ -10,9 +16,6 @@ if (isset($_SESSION["error"])) {
     echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
     unset($_SESSION["error"]);
 }
-
-// unset session variable for username
-unset($_SESSION["username"]);
 
 // Check if the form is submitted
 if ( isset($_POST['login-submit'])) {
@@ -37,7 +40,7 @@ if ( isset($_POST['login-submit'])) {
                 return;
             } else {
                 // If no matching record is found, set an error message and redirect to  login.php
-                $_SESSION["error"] = "Incorrect username or password.";
+                $_SESSION["error"] = "Incorrect username or password. Would you like to <a href='register.php'>register?</a>";
                 header('Location: login.php');
                 return;
             }

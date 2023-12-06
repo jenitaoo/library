@@ -26,18 +26,14 @@ echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
 unset($_SESSION["error"]);
 }
 
-// Check if the user is not logged in (returns true if username is not set)
-if (!isset($_SESSION["username"])) { 
-    // User is not logged in
-    // 
-    
-
+// Check if the user is logged in (returns true if username is set)
+if (isset($_SESSION["username"])) { 
+    // User is logged in
+    echo "yeah you're logged in";
 }
 else {
-    // User is logged in
-    // set an error that they're already logged in and send them back to homepage
-    $_ERROR = $_SESSION["error"] = "You're already logged in to an account! <a href='logout.php'>Log out?</a>";
-    header("Location: index.php");
+    //
+    echo "mf is NOT logged in";
 }
 
 ?>
