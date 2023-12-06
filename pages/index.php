@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "config.php";
+require_once "..\configs\config.php";
 
 // Check if session started successfully
 if(isset($_SESSION["error"])){
@@ -28,7 +28,7 @@ if (!isset($_SESSION["username"])) {
     echo "Please <a href='pages/authentication/login.php'>Log In</a> to start.";
 } // otherwise they're logged in, show them the links to other pages
 else { 
-    require_once "includes/header.php";
+    require_once "../includes/header.php";
     echo "You're logged in!";
     
 }
@@ -37,7 +37,7 @@ else {
 ?>
 
 
-<?php require_once "includes/footer.php";?>
+<?php require_once "../includes/footer.php";?>
 
 </body>
 </html>

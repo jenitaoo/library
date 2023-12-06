@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "..\configs\config.php";
 
 // Start a session and unset any existing "username" session variable
 session_start();
@@ -11,17 +11,20 @@ if (isset($_SESSION["error"])) {
     unset($_SESSION["error"]);
 }
 
+// unset session variable for username
 unset($_SESSION["username"]);
 
 // Check if the form is submitted
 if ( isset($_POST['login-submit'])) {
+    // Check if both fields were filled out
+    // If yes, then check if they match
     if (isset($_POST["username"]) && isset($_POST["user_pw"])) { 
         // Get the values entered by the form and clean them
         $username = $conn->real_escape_string($_POST["username"]);
         $password = $conn->real_escape_string($_POST["user_pw"]);
     
         // Query the database to check if the username and password match
-        $sql = "SELECT * FROM user_account WHERE username = '$username' AND user_pw = '$password'";
+        $sql = "SELECT * FROM Users WHERE Username = '$username' AND Password = '$password'";
         $result = $conn->query($sql);
 
         // check if the query ran successfully
@@ -33,7 +36,7 @@ if ( isset($_POST['login-submit'])) {
                 header('Location: index.php');
                 return;
             } else {
-                // If no matching record is found, set an error message and redirect to login.php
+                // If no matching record is found, set an error message and redirect to  login.php
                 $_SESSION["error"] = "Incorrect username or password.";
                 header('Location: login.php');
                 return;
@@ -73,5 +76,11 @@ if ( isset($_POST['login-submit'])) {
     <p>Password: <input type="password" name="user_pw" value=""></p> 
     <p><input type="submit" name="login-submit"value="Log in"></p>
 </form>
+
+<?php require_once "../includes/footer.php";?>
+
 </body>
 </html>
+
+
+<?php $conn->close();?>

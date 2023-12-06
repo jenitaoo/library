@@ -1,4 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<p>This is a footer</p>
-</html>
+<footer>
+  <p>This is a footer</p>
+</footer>
