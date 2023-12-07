@@ -1,47 +1,54 @@
 <?php
 /**
- * Registration page
+ * Name
  * 
- * Users can enter in their information and a new record is created in the database
+ * Description
  */
-
-// Get the page ready, start sessions and include files
 session_start();
-require_once "../configs/config.php";
+
+require_once "..\configs\config.php";
+
+// Check session for errors
+// Display success message if set
+if (isset($_SESSION["success"])) {
+    echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
+    unset($_SESSION["sucess"]);
+}
+// Display error message if set
+if (isset($_SESSION["error"])) {
+    echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
+    unset($_SESSION["error"]);
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Search</title>
 </head>
 <body>
 
-<?php
-// Display error message if set
-if (isset($_SESSION["error"])) {
-echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
-unset($_SESSION["error"]);
-}
 
-// Check if the user is logged in (returns true if username is set)
-if (isset($_SESSION["username"])) { 
-    // User is logged in
-    echo "yeah you're logged in";
-}
-else {
-    //
-    echo "mf is NOT logged in";
+<?php
+
+// Check the session, if user is not already logged in then provide link to login page
+if (!isset($_SESSION["username"])) { 
+    // User not logged in
+    echo "Please <a href='login.php'>Log In</a> to start.";
+} // otherwise they're logged in, show them the links to other pages
+else { 
+    // User logged in
+    require_once "../includes/header.php";
 }
 
 ?>
-    
+
 
 
 <?php require_once "../includes/footer.php";?>
-
 
 </body>
 </html>
