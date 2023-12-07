@@ -13,7 +13,7 @@ require_once "../configs/config.php";
 // Display success message if set
 if (isset($_SESSION["success"])) {
     echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
-    unset($_SESSION["sucess"]);
+    unset($_SESSION["success"]);
 }
 
 // Display error message if set
