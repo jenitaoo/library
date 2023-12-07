@@ -19,12 +19,13 @@ if (isset($_SESSION["error"])) {
 
 // Check if the form is submitted
 if ( isset($_POST['login-submit'])) {
+    echo $_POST["username"];
     // Check if both fields were filled out
     // If yes, then check if they match
-    if (isset($_POST["username"]) && isset($_POST["user_pw"])) { 
+    if (isset($_POST["username"]) && isset($_POST["password"])) { 
         // Get the values entered by the form and clean them
         $username = $conn->real_escape_string($_POST["username"]);
-        $password = $conn->real_escape_string($_POST["user_pw"]);
+        $password = $conn->real_escape_string($_POST["password"]);
     
         // Query the database to check if the username and password match
         $sql = "SELECT * FROM Users WHERE Username = '$username' AND Password = '$password'";
@@ -50,7 +51,7 @@ if ( isset($_POST['login-submit'])) {
             header('Location: login.php');
             return;
         } 
-    } else if (count($_POST) > 0) { 
+    } else { 
         // If form is submitted but required information is missing, set an error message and redirect to login.php
         $_SESSION["error"] = "Missing Required Information";
         header('Location: login.php');
@@ -72,13 +73,13 @@ if ( isset($_POST['login-submit'])) {
 
 <h1>Log In</h1>
 
-
-
 <form method="post">
     <p>Username: <input type="text" name="username" value=""></p>
-    <p>Password: <input type="password" name="user_pw" value=""></p> 
+    <p>Password: <input type="password" name="password" value=""></p> 
     <p><input type="submit" name="login-submit"value="Log in"></p>
 </form>
+
+<p>Don't have an account? <a href="register.php">Register here.</a></p>
 
 <?php require_once "../includes/footer.php";?>
 
