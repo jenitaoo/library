@@ -25,7 +25,6 @@ if (isset($_SESSION["error"])) {
 // Check if the register form was submitted
 if (isset($_POST['register-submit'])) {
     // Check if all fields were filled 
-    echo "submitted";
     if(
         isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['confpass']) && isset($_POST['fname']) && isset($_POST['sname']) &&
         isset($_POST['add1']) && isset($_POST['add2']) && isset($_POST['city']) && isset($_POST['tel']) && isset($_POST['mob'])
@@ -64,12 +63,14 @@ if (isset($_POST['register-submit'])) {
                 return;
             } 
         } else {
-            echo "Error: Passwords do not match.";
+            $_SESSION["error"] = "Passwords do not match";
+            header('Location: register.php');
             return;
         }
     } else {
         // One or more fields empty, tell error
-        echo "Error: Missing or empty required fields.";
+        $_SESSION["error"] = "Missing Required Information";
+        header('Location: register.php');
         return;
     }
 
@@ -99,7 +100,7 @@ if (!isset($_SESSION["username"])) {
     // Show the user a form and get their details to register
 ?>
     <h1>Register An Account</h1>
-    <form method="post">
+    <form method="post" action="">
         <label for="uname">Username:</label>
         <input type="text" id="uname" name="uname" required></br></br>
 
