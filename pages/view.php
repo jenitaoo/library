@@ -76,8 +76,6 @@ else {
     
         echo "</table></br>";
     }
-     else {
-    }
 }
 
 ?>
