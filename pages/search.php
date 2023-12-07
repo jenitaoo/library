@@ -106,9 +106,12 @@ if(isset($_POST["search-submit"])){
                     <td>" . htmlentities($row["Edition"]) . "</td>
                     <td>" . htmlentities($row["Year"]) . "</td>
                     <td>" . htmlentities($row["CategoryCode"]) . "</td>
-                    <td>" . htmlentities($row["Reservation"]) . "</td>
-                    <td><a href='reserve.php?id=" . $row["ISBN"] . "'>Reserve</a></td>
-                  </tr>";
+                    <td>" . htmlentities($row["Reservation"]) . "</td>";
+
+            if ( htmlentities($row["Reservation"])==="N"){
+                echo "<td><a href='reserve.php?id=" . $row["ISBN"] . "'>Reserve</a></td>
+                </tr>";
+            }
         }
     
         echo "</table></br>";
