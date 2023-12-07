@@ -6,14 +6,20 @@ session_start();
 
 require_once "..\configs\config.php";
 
-// Check if session started successfully
-if(isset($_SESSION["error"])){
-    echo"<p style='color:red'>" . $_SESSION["error"] . "</p>";
+// Check session for errors
+// Display success message if set
+if (isset($_SESSION["success"])) {
+    echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
+    unset($_SESSION["sucess"]);
+}
+// Display error message if set
+if (isset($_SESSION["error"])) {
+    echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
     unset($_SESSION["error"]);
 }
 ?>
 
-
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
