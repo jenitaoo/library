@@ -50,7 +50,7 @@ if (isset($_POST['delete-submit'])) {
             // Check if queries ran successfully
             if ($result1 && $result2) {
                 // Handle the case where the query failed
-                $_SESSION["Sucess"] = "Book reserved successfully";
+                $_SESSION["Succ ess"] = "Book reserved successfully";
                 header('Location: search.php');
                 return;
             } else {
@@ -73,8 +73,6 @@ if (isset($_POST['delete-submit'])) {
             header('Location: search.php');
             return;
     }
-
-
 }
 ?>
 

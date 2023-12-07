@@ -55,3 +55,10 @@ else {
 
 
 <?php $conn->close();?>
+
+
+// Get data for books from the database
+    $sql = "SELECT `books`.`ISBN`, `books`.`BookTitle`, `books`.`Author`
+            FROM `books`
+            INNER JOIN `reservations` ON `books`.`ISBN` = `reservations`.`ISBN`
+            WHERE `reservations`.`Username` = '$username'";
