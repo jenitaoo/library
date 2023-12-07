@@ -23,7 +23,7 @@ if (isset($_SESSION["error"])) {
 }
 
 // Check if reserve confirm form was submitted and 'id' is set in the URL
-if (isset($_POST['delete-submit'])) {
+if (isset($_POST['unreserve-submit'])) {
     // Check if ID is set
     if (isset($_GET['id'])) {
         // get the isbn from the id in the URL
@@ -37,13 +37,15 @@ if (isset($_POST['delete-submit'])) {
         // Get the row of the result
         $row = $result->fetch_assoc();
 
-        // Check if the book is not already reserved
-        if (htmlentities($row["Reservation"]) === "N") {
+        // Check if the book is reserved
+        if (htmlentities($row["Reservation"]) === "Y") {
+
             // Update the reservation value for the book in the database
-            $sql = "UPDATE `books` SET `Reservation` = 'Y' WHERE `ISBN` = '$isbn'";
+            $sql = "UPDATE `books` SET `Reservation` = 'N' WHERE `ISBN` = '$isbn'";
             $result1 = $conn->query($sql);
 
-            $sql = "INSERT INTO `reservations`(`ISBN`, `Username`, `ReservedDate`) VALUES ('$isbn','$username',NOW())";
+            // Delete the row from the reservatiosn table 
+            $sql = "DELETE FROM `reservations` WHERE `ISBN` = '$isbn'";
             $result2 = $conn->query($sql);
             
             // Check if queries ran successfully
@@ -55,22 +57,16 @@ if (isset($_POST['delete-submit'])) {
             } else {
                 // Handle the case where the query failed
                 $_SESSION["error"] = "Error executing queries.";
-                header('Location: search.php');
+                header('Location: view_reserved.php');
                 return;
             }
-        } else {
-            // Handle the case where book is already reserved
-            $_SESSION["error"] = "Can't reserve this book! Already reserved";
-            header('Location: search.php');
-            return;
-        }
-
     } else {
             // Handle the case where the query failed
             $_SESSION["error"] = "Error: Id not set";
             header('Location: search.php');
             return;
     }
+}
 }
 ?>
 
@@ -80,7 +76,7 @@ if (isset($_POST['delete-submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserve</title>
+    <title>Unreserve Book</title>
 </head>
 <body>
 
@@ -97,10 +93,10 @@ else {
     require_once "../includes/header.php";
     // Display confirmation form for user to reserve this book
 ?>
-    <h1>Reserve A Book</h1>
+    <h1>Unreserve A Book</h1>
     <form method="post">
-        <p>Are you sure you want to reserve this book??</p>
-        <input type="submit" name="delete-submit" value="Confirm">
+        <p>Are you sure you want to unreserve this book??</p>
+        <input type="submit" name="unreserve-submit" value="Confirm">
     </form>
 <?php
 

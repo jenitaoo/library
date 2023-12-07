@@ -65,7 +65,7 @@ else {
             <th>Reservation</th>
         </tr><?php
         
-        // get 
+        // get data
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
                     <td>" . htmlentities($row["ISBN"]) . "</td>
@@ -74,16 +74,16 @@ else {
                     <td>" . htmlentities($row["Edition"]) . "</td>
                     <td>" . htmlentities($row["Year"]) . "</td>
                     <td>" . htmlentities($row["CategoryCode"]) . "</td>
-                    <td>" . htmlentities($row["Reservation"]) . "</td>
-                    <td><a href='reserve.php?id=" . $row["ISBN"] . "'>Reserve</a></td>
-                  </tr>";
+                    <td>" . htmlentities($row["Reservation"]) . "</td>";
+
+            if ( htmlentities($row["Reservation"])==="Y"){
+                echo "<td><a href='unreserve.php?id=" . $row["ISBN"] . "'>Unreserve</a></td>
+                </tr>";
+            }
         }
     
-    }else {
-        echo "No books reserved.";
+        echo "</table></br>";
     }
-
-    echo "</table></br>";
 }
 
 ?>
