@@ -1,5 +1,5 @@
 <?php
-// Check session for errors
+// Check session for sucesses and errors so we can let the user know what's up
 // Display success message if set
 if (isset($_SESSION["success"])) {
     echo('<p class= "alert alert-success">' . $_SESSION["success"] . "</p>\n");

@@ -1,26 +1,17 @@
 <?php
 /**
- * login page, allows users to login if they haven't already.
- * if their login doesn't work, send them over to register an account
+ * login page, 
+ * 
+ * Allows users to login to an existing account.
+ * If they haven't made an account yet, gives user a link to register their account
  */
 // Start a session and unset any existing "username" session variable
 session_start();
-// unset session variable for username
+// Unset session variable for username
 unset($_SESSION["username"]);
 
+// Connect to database
 require_once "..\configs\config.php";
-
-// Check session for errors
-// Display success message if set
-if (isset($_SESSION["success"])) {
-    echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
-    unset($_SESSION["success"]);
-}
-// Display error message if set
-if (isset($_SESSION["error"])) {
-    echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
-    unset($_SESSION["error"]);
-}
 
 // Check if the form is submitted
 if ( isset($_POST['login-submit'])) {
@@ -63,9 +54,7 @@ if ( isset($_POST['login-submit'])) {
         return;
     }
 }   
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,19 +77,58 @@ if ( isset($_POST['login-submit'])) {
 
     <!--LINK IN STYLESHEETS-->
     <link rel="stylesheet" href="..\styles\style.css">
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-<h1>Log In</h1>
+<?php require_once "../includes/header.php";?>
 
-<form method="post">
-    <p>Username: <input type="text" name="username" value=""></p>
-    <p>Password: <input type="password" name="password" value=""></p> 
-    <p><input type="submit" name="login-submit"value="Log in"></p>
-</form>
+<main>
+ <!--FORM-->
+    <section>
+        <div class="container">
+            <div class="row">
+                 <!--FIRST COLUMN WITH IMAGE-->
+                 <div class="col-lg-5">
+                     <section>
+                        <img id="formImage" src="..\assets\library_shelves.jpg" class="img-fluid fullImage" alt="Library shelves">
+                    </section>
+                </div>
 
-<p>Don't have an account? <a href="register.php">Register here.</a></p>
+                <!--SECOND COLUMN WITH FORM-->
+                <div class="col-lg-7">
+                    <section class="form">
+                        <form method="post">
+                            </br>
+                            <h1>Log In</h1>
+                            <p>
+                                Let's get started! To access our services you'll need to login.
+                            </p>
+                            <div class="input-control">
+                                <label for="username">Username</label>
+                                <input class="form-control type="text" name="username" value="" placeholder="John Smith">
 
-<?php require_once "../includes/footer.php";?>
+                            </div>  
+                            <div class="input-control">
+                                <label for="username">Password</label>
+                                <input class="form-control" type="password" name="password" value="" placeholder="Secure Password">
+                               
+                            </div>  
+                            </br>
+                            <input class="btn btn-default" type="submit" name="login-submit"value="Log in">
+                        </form>      
+                    </section>
+                    </br></br></br></br><p>Don't have an account? <a href="register.php">Register here.</a></p>
+                </div>
+            </div>
+         </div>
+    </section>
+</main>
+
+
+<?php 
+// Check session for errors
+require_once "error_check.php";
+require_once "../includes/footer.php";
+?>
 
 </body>
 </html>

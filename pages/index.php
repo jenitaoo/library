@@ -8,8 +8,6 @@ session_start();
 
 // Connect to database
 require_once "..\configs\config.php";
-// Check session for errors
-require_once "error_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +63,8 @@ if (!isset($_SESSION["username"])) {
     </main>
 <?php
 }
-
+// Check session for errors
+require_once "error_check.php";
 require_once "../includes/footer.php";?>
 
     <!--LINK IN BOOTSTRAP SCRIPTS-->
