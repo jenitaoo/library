@@ -80,48 +80,44 @@ if ( isset($_POST['login-submit'])) {
 <body class="d-flex flex-column min-vh-100">
 
 <?php require_once "../includes/header.php";?>
-
 <main>
- <!--FORM-->
+    <!--FORM-->
     <section>
         <div class="container">
             <div class="row">
                  <!--FIRST COLUMN WITH IMAGE-->
                  <div class="col-lg-5">
                      <section>
-                        <img id="formImage" src="..\assets\library_shelves.jpg" class="img-fluid fullImage" alt="Library shelves">
+                        <img src="..\assets\library_shelves.jpg" class="img-fluid fullImage" alt="Library shelves">
                     </section>
                 </div>
 
                 <!--SECOND COLUMN WITH FORM-->
                 <div class="col-lg-7">
                     <section class="form">
-                        <form method="post">
+                        <form id="form" method="post" action="">
                             </br>
                             <h1>Log In</h1>
-                            <p>
-                                Let's get started! To access our services you'll need to login.
-                            </p>
+                            <p>Let's get started! To access our services you'll need to login.</br>
+                            Don't have an account? <a href="register.php">Register here!</a></p>
                             <div class="input-control">
                                 <label for="username">Username</label>
-                                <input class="form-control type="text" name="username" value="" placeholder="John Smith">
-
+                                <input class="form-control" type="text" name="username" value="" placeholder="John Smith">
+                                <div class="error"></div>
                             </div>  
                             <div class="input-control">
                                 <label for="username">Password</label>
                                 <input class="form-control" type="password" name="password" value="" placeholder="Secure Password">
-                               
+                                <div class="error"></div>
                             </div>  
-                            </br>
-                            <input class="btn btn-default" type="submit" name="login-submit"value="Log in">
+                            </br><input class="btn btn-default" type="submit" name="login-submit" value="Log In">
                         </form>      
                     </section>
-                    </br></br></br></br><p>Don't have an account? <a href="register.php">Register here.</a></p>
                 </div>
             </div>
          </div>
-    </section>
-</main>
+    </section>  
+</main>  
 
 
 <?php 

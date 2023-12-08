@@ -127,7 +127,7 @@ if (!isset($_SESSION["username"])) {
 ?>   
     <main>
         <!--FORM-->
-        <section id="aboutAndArticleGrid">
+        <section>
             <div class="container">
                 <div class="row">
                      <!--FIRST COLUMN WITH IMAGE-->
