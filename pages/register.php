@@ -45,6 +45,16 @@ if (isset($_POST['register-submit'])) {
         $telephone = $_POST['tel'];
         $mobile = $_POST['mob'];
 
+        //Check if username is unique
+        $sql = "SELECT * FROM `users` WHERE `Username` = '$username'";
+        $result = $conn->query($sql);
+        // Check record with username already exists in database, 
+        if($result->num_rows > 0) {
+            $_SESSION["error"] = "Error: This username already exists";
+            header("Location: register.php");
+            return;
+        }
+
         // Check if password confirmation matches up
         if($password === $confpassword){
             // Create a new record in the database
@@ -54,7 +64,7 @@ if (isset($_POST['register-submit'])) {
 
             // Check if it worked
             if ($result === TRUE) {
-                $_SESSION["sucess"] = "Success: Account registered successfully.";
+                $_SESSION["success"] = "Success: Account registered successfully.";
                 header("Location: index.php"); 
             } else {
                 // Handle the case where the query failed
@@ -104,11 +114,11 @@ if (!isset($_SESSION["username"])) {
         <label for="uname">Username:</label>
         <input type="text" id="uname" name="uname" required></br></br>
 
-        <label for="pass">Password:</label>
-        <input type="password" id="pass" name="pass" required></br></br>
+        <label for="pass">Password (6 characters minimum):</label>
+        <input type="password" minlength="6" id="pass" name="pass" required></br></br>
 
         <label for="confpass">Confirm Password:</label>
-        <input type="password" id="confpass" name="confpass" required></br></br>
+        <input type="password"  minlength="6" id="confpass" name="confpass" required></br></br>
 
         <label for="fname">First Name:</label>
         <input type="text" id="fname" name="fname" required></br></br>
@@ -126,10 +136,10 @@ if (!isset($_SESSION["username"])) {
         <input type="text" id="city" name="city" required></br></br>
 
         <label for="tel">Telephone:</label>
-        <input type="tel" id="tel" name="tel" required></br></br>
+        <input type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="tel" name="tel" required></br></br>
 
         <label for="mob">Mobile:</label>
-        <input type="tel" id="mob" name="mob" required></br>
+        <input type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="mob" name="mob" required></br>
 
         <p><input type="submit" name="register-submit" value="Register User"/></p>
     </form>
