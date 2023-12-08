@@ -1,17 +1,7 @@
 <?php
-/**
- * Search page
- * 
- * Allow user to partial search for book 
- * 1) book title and/or author 
- * 2) book category description (dropdown)
- * 
- * And also allow user to reserve book 
- * 
- */
 session_start();
 
-require_once "..\configs\config.php";
+require_once "../configs/config.php";
 
 // Check session for errors
 // Display success message if set
@@ -26,7 +16,6 @@ if (isset($_SESSION["error"])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,35 +25,57 @@ if (isset($_SESSION["error"])) {
 </head>
 <body>
 
-
 <?php
-
-// Check the session, if user is not already logged in then provide link to login page
+// Check the session, if the user is not already logged in then provide a link to the login page
 if (!isset($_SESSION["username"])) { 
     // User not logged in
     echo "Please <a href='login.php'>Log In</a> to start.";
-} // otherwise they're logged in, show them the links to other pages
+} // otherwise, they're logged in, show them the links to other pages
 else { 
     // User logged in
     require_once "../includes/header.php";
 }
 ?>
-    
-    <h1>Search For Book</h1>
-    <div class="container">
+
+<h1>Search For Book</h1>
+<div class="container">
     <form method="post" action="">
-        <input type="text" id="search" name="search" placeholder="Search Data">
-        <input type="text" id="search2" name="search2" placeholder="Search Data">
+        <input type="text" id="search" name="search" placeholder="Search Book Title">
+        <input type="text" id="search2" name="search2" placeholder="Search Author">
+
+        <label for="category">Select Category:</label>
+        <select id="category" name="category">
+            <option value="">All Categories</option>
+            <?php
+            // Fetch categories from the database
+            $categoryQuery = "SELECT * FROM categories";
+            $categoryResult = $conn->query($categoryQuery);
+
+            // Check for errors in fetching categories
+            if (!$categoryResult) {
+                die("Error fetching categories: " . $conn->error);
+            }
+
+            // Display categories in the dropdown
+            while ($categoryRow = $categoryResult->fetch_assoc()) {
+                echo "<option value='" . htmlentities($categoryRow["CategoryID"]) . "'>" . htmlentities($categoryRow["CategoryDescription"]) . "</option>";
+            }
+
+            ?>
+        </select>
 
         <button name="search-submit">Search</button>
-        </form>
-    </div>
+        
+    </form>
+    
+</div>
 
 <?php
 // If the search is submitted
-if(isset($_POST["search-submit"])){
+if (isset($_POST["search-submit"])) {
     $search = isset($_POST["search"]) ? $_POST["search"] : "";
     $search2 = isset($_POST["search2"]) ? $_POST["search2"] : "";
+    $category = isset($_POST["category"]) ? $_POST["category"] : "";
 
     // Query the db and get the data that matches if both fields entered
     if (!empty($search) && !empty($search2)) {
@@ -78,6 +89,13 @@ if(isset($_POST["search-submit"])){
         $sql = "SELECT * FROM `books`";
     }
 
+    if(empty($search) && empty($search2) && !empty($category)){
+        $sql .= " WHERE `CategoryCode` LIKE '$category'";
+    } elseif (!empty($category)) {
+        $sql .= " AND `CategoryCode` LIKE '$category'";
+    }
+    
+ 
 
 
     $result = $conn->query($sql);
@@ -108,22 +126,20 @@ if(isset($_POST["search-submit"])){
                     <td>" . htmlentities($row["CategoryCode"]) . "</td>
                     <td>" . htmlentities($row["Reservation"]) . "</td>";
 
-            if ( htmlentities($row["Reservation"])==="N"){
+            if (htmlentities($row["Reservation"]) === "N") {
                 echo "<td><a href='reserve.php?id=" . $row["ISBN"] . "'>Reserve</a></td>
                 </tr>";
             }
         }
-    
+
         echo "</table></br>";
     }
 }
 
-
-
-require_once "../includes/footer.php";?>
+require_once "../includes/footer.php";
+?>
 
 </body>
 </html>
-
 
 <?php $conn->close();?>
