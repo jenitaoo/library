@@ -39,7 +39,6 @@ require_once "..\configs\config.php";
 // Check if user is logged in
 if (!isset($_SESSION["username"])) { 
     require_once "no_login.php" ;
-    
     return;
 } else { 
     // They're logged in, let them access the rest of the website!

@@ -21,7 +21,7 @@ require_once "../configs/config.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--TITLE-->
-    <title>Search</title>
+    <title>Our Catalogue</title>
 
     <!--LINK IN FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">

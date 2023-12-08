@@ -2,8 +2,8 @@
 /**
  * Reservation page
  * 
- * Given that the book isn't already reserved, this page allows users to reserve a book 
- * Updates the database that the book has been reserved and creates a reservation link between the user and book
+ * Given that the book is reserved, this page allows users to unreserve a book 
+ * Updates the database that the book has been unreserved and deletes a reservation link between the user and book
  */
 session_start();
 

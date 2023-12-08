@@ -9,19 +9,6 @@
 session_start();
 require_once "../configs/config.php";
 
-// Check session for errors
-// Display success message if set
-if (isset($_SESSION["success"])) {
-    echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
-    unset($_SESSION["success"]);
-}
-
-// Display error message if set
-if (isset($_SESSION["error"])) {
-    echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
-    unset($_SESSION["error"]);
-}
-
 // Check if the register form was submitted
 if (isset($_POST['register-submit'])) {
     // Check if all fields were filled 
@@ -119,106 +106,99 @@ echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
 unset($_SESSION["error"]);
 }
 
-// Check if the user is not logged in (returns true if username is not set)
-if (!isset($_SESSION["username"])) { 
-    // User is not logged in
-    // Show the user a form and get their details to register
-    require_once "..\includes\header.php";
-?>   
-    <main>
-        <!--FORM-->
-        <section>
-            <div class="container">
-                <div class="row">
-                     <!--FIRST COLUMN WITH IMAGE-->
-                     <div class="col-lg-5">
-                         <section>
-                            <img src="..\assets\really-long-library-shelves.jpg" class="img-fluid fullImage" alt="Book shelves">
-                            </br></br><p>Already have an account? <a href="login.php">Log in here!</a></p>
-                        </section>
-                    </div>
-    
-                    <!--SECOND COLUMN WITH FORM-->
-                    <div class="col-lg-7">
-                        <section class="form">
-                            <form id="form" method="post" action="">
-                                <h1>Register An Account</h1>
-                                <div class="input-control">
-                                    <label for="uname">Username:</label>
-                                    <input class="form-control" type="text" id="uname" name="uname" placeholder="John Smith" required>
-                                    <div class="error"></div>
-                                </div>
-                                <div class="input-control">
-                                    <label for="pass">Password (6 characters minimum):</label>
-                                    <input class="form-control" type="password" minlength="6" id="pass" name="pass" required>
-                                    <div class="error"></div>
-                                </div>
 
-                                <div class="input-control">
-                                    <label for="confpass">Confirm Password:</label>
-                                    <input class="form-control" type="password"  minlength="6" id="confpass" name="confpass" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                <div class="input-control">
-                                    <label for="fname">First Name:</label>
-                                    <input class="form-control" type="text" id="fname" name="fname" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                <div class="input-control">
-                                    <label for="sname">Surname:</label>
-                                    <input class="form-control" type="text" id="sname" name="sname" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                <div class="input-control">
-                                    <label for="add1">Address Line 1:</label>
-                                    <input  class="form-control" type="text" id="add1" name="add1" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                <div class="input-control">
-                                    <label for="add2">Address Line 2:</label>
-                                    <input class="form-control" type="text" id="add2" name="add2" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                <div class="input-control">
-                                    <label for="city">City:</label>
-                                    <input  class="form-control" type="text" id="city" name="city" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                <div class="input-control">
-                                    <label for="tel">Telephone:</label>
-                                    <input class="form-control" type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="tel" name="tel" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                <div class="input-control">
-                                    <label for="mob">Mobile:</label>
-                                    <input class="form-control" type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="mob" name="mob" required>
-                                    <div class="error"></div>
-                                </div>
-
-                                </br><input class="btn btn-default" type="submit" name="register-submit" value="Register User">
-                            </form>      
-                        </section>
-                    </div>
+// User is not logged in
+// Show the user a form and get their details to register
+require_once "..\includes\header.php";
+?>
+<main>
+    <!--FORM-->
+    <section>
+        <div class="container">
+            <div class="row">
+                 <!--FIRST COLUMN WITH IMAGE-->
+                 <div class="col-lg-5">
+                     <section>
+                        <img src="..\assets\really-long-library-shelves.jpg" class="img-fluid fullImage" alt="Book shelves">
+                        </br></br><p>Already have an account? <a href="login.php">Log in here!</a></p>
+                    </section>
                 </div>
-             </div>
-        </section>  
-    </main>    
+
+                <!--SECOND COLUMN WITH FORM-->
+                <div class="col-lg-7">
+                    <section class="form">
+                        <form id="form" method="post" action="">
+                            <h1>Register An Account</h1>
+                            <div class="input-control">
+                                <label for="uname">Username:</label>
+                                <input class="form-control" type="text" id="uname" name="uname" placeholder="John Smith" required>
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                                <label for="pass">Password (6 characters minimum):</label>
+                                <input class="form-control" type="password" minlength="6" id="pass" name="pass" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="confpass">Confirm Password:</label>
+                                <input class="form-control" type="password"  minlength="6" id="confpass" name="confpass" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="fname">First Name:</label>
+                                <input class="form-control" type="text" id="fname" name="fname" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="sname">Surname:</label>
+                                <input class="form-control" type="text" id="sname" name="sname" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="add1">Address Line 1:</label>
+                                <input  class="form-control" type="text" id="add1" name="add1" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="add2">Address Line 2:</label>
+                                <input class="form-control" type="text" id="add2" name="add2" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="city">City:</label>
+                                <input  class="form-control" type="text" id="city" name="city" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="tel">Telephone:</label>
+                                <input class="form-control" type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="tel" name="tel" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="input-control">
+                                <label for="mob">Mobile:</label>
+                                <input class="form-control" type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="mob" name="mob" required>
+                                <div class="error"></div>
+                            </div>
+
+                            </br><input class="btn btn-default" type="submit" name="register-submit" value="Register User">
+                        </form>      
+                    </section>
+                </div>
+            </div>
+         </div>
+    </section>  
+</main>    
 
 <?php
-}
-else {
-    // User is logged in
-    // Set an error that they're already logged in and send them back to homepage
-    $_ERROR = $_SESSION["error"] = "You're already logged in to an account! <a href='logout.php'>Log out?</a>";
-    header("Location: index.php");
-}
+
     
 
 // Check session for errors

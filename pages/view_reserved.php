@@ -1,6 +1,9 @@
 <?php
 /**
- * Home page, prompts user for login if they aren't already and if they are, allows them to access the pages on the website
+ *  View. search and unreserve reserved books
+ * 
+ * This page gives a table of the books reserved by the user. 
+ 
  */
 session_start();
 
