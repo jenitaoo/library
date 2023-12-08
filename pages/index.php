@@ -8,6 +8,7 @@ session_start();
 
 // Connect to database
 require_once "..\configs\config.php";
+require "error_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +40,7 @@ require_once "..\configs\config.php";
 // Check if user is logged in
 if (!isset($_SESSION["username"])) { 
     require_once "no_login.php" ;
+    
     return;
 } else { 
     // They're logged in, let them access the rest of the website!
@@ -64,7 +66,7 @@ if (!isset($_SESSION["username"])) {
 <?php
 }
 // Check session for errors
-require_once "error_check.php";
+require "error_check.php";
 require_once "../includes/footer.php";?>
 
     <!--LINK IN BOOTSTRAP SCRIPTS-->

@@ -123,41 +123,93 @@ unset($_SESSION["error"]);
 if (!isset($_SESSION["username"])) { 
     // User is not logged in
     // Show the user a form and get their details to register
-?>
-    <h1>Register An Account</h1>
-    <form method="post" action="">
-        <label for="uname">Username:</label>
-        <input type="text" id="uname" name="uname" required></br></br>
+    require_once "..\includes\header.php";
+?>   
+    <main>
+        <!--FORM-->
+        <section id="aboutAndArticleGrid">
+            <div class="container">
+                <div class="row">
+                     <!--FIRST COLUMN WITH IMAGE-->
+                     <div class="col-lg-5">
+                         <section>
+                            <img src="..\assets\really-long-library-shelves.jpg" class="img-fluid fullImage" alt="Book shelves">
+                            </br></br><p>Already have an account? <a href="login.php">Log in here!</a></p>
+                        </section>
+                    </div>
+    
+                    <!--SECOND COLUMN WITH FORM-->
+                    <div class="col-lg-7">
+                        <section class="form">
+                            <form id="form" method="post" action="">
+                                <h1>Register An Account</h1>
+                                <div class="input-control">
+                                    <label for="uname">Username:</label>
+                                    <input class="form-control" type="text" id="uname" name="uname" placeholder="John Smith" required>
+                                    <div class="error"></div>
+                                </div>
+                                <div class="input-control">
+                                    <label for="pass">Password (6 characters minimum):</label>
+                                    <input class="form-control" type="password" minlength="6" id="pass" name="pass" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="pass">Password (6 characters minimum):</label>
-        <input type="password" minlength="6" id="pass" name="pass" required></br></br>
+                                <div class="input-control">
+                                    <label for="confpass">Confirm Password:</label>
+                                    <input class="form-control" type="password"  minlength="6" id="confpass" name="confpass" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="confpass">Confirm Password:</label>
-        <input type="password"  minlength="6" id="confpass" name="confpass" required></br></br>
+                                <div class="input-control">
+                                    <label for="fname">First Name:</label>
+                                    <input class="form-control" type="text" id="fname" name="fname" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="fname" required></br></br>
+                                <div class="input-control">
+                                    <label for="sname">Surname:</label>
+                                    <input class="form-control" type="text" id="sname" name="sname" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="sname">Surname:</label>
-        <input type="text" id="sname" name="sname" required></br></br>
+                                <div class="input-control">
+                                    <label for="add1">Address Line 1:</label>
+                                    <input  class="form-control" type="text" id="add1" name="add1" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="add1">Address Line 1:</label>
-        <input type="text" id="add1" name="add1" required></br></br>
+                                <div class="input-control">
+                                    <label for="add2">Address Line 2:</label>
+                                    <input class="form-control" type="text" id="add2" name="add2" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="add2">Address Line 2:</label>
-        <input type="text" id="add2" name="add2" required></br></br>
+                                <div class="input-control">
+                                    <label for="city">City:</label>
+                                    <input  class="form-control" type="text" id="city" name="city" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required></br></br>
+                                <div class="input-control">
+                                    <label for="tel">Telephone:</label>
+                                    <input class="form-control" type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="tel" name="tel" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="tel">Telephone:</label>
-        <input type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="tel" name="tel" required></br></br>
+                                <div class="input-control">
+                                    <label for="mob">Mobile:</label>
+                                    <input class="form-control" type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="mob" name="mob" required>
+                                    <div class="error"></div>
+                                </div>
 
-        <label for="mob">Mobile:</label>
-        <input type="text" pattern="[0-9]{10}" title="Please enter 10 numbers" id="mob" name="mob" required></br>
-
-        <p><input type="submit" name="register-submit" value="Register User"/></p>
-    </form>
+                                </br><input class="btn btn-default" type="submit" name="register-submit" value="Register User">
+                            </form>      
+                        </section>
+                    </div>
+                </div>
+             </div>
+        </section>  
+    </main>    
 
 <?php
 }

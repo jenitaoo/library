@@ -1,4 +1,3 @@
-
 <main>
     <section class="landing">
         <div class="container">
