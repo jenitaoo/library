@@ -1,24 +1,16 @@
 <?php
 /**
- * Home page, prompts user for login if they aren't already and if they are, allows them to access the pages on the website
+ * Home page
+ * 
+ * Prompts user for login if they aren't already and if they are, allows them to access the pages on the website
  */
 session_start();
 
+// Connect to database
 require_once "..\configs\config.php";
-
 // Check session for errors
-// Display success message if set
-if (isset($_SESSION["success"])) {
-    echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
-    unset($_SESSION["success"]);
-}
-// Display error message if set
-if (isset($_SESSION["error"])) {
-    echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
-    unset($_SESSION["error"]);
-}
+require_once "error_check.php";
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,38 +37,36 @@ if (isset($_SESSION["error"])) {
 </head>
 <body>
 
-
 <?php
-// Check the session, if user is not already logged in then provide link to login page
+// Check if user is logged in
 if (!isset($_SESSION["username"])) { 
-    echo "Please <a href='login.php'>Log In</a> to start.";
-} // otherwise they're logged in, show them the links to other pages
-else { 
+    require_once "no_login.php" ;
+    return;
+} else { 
     // They're logged in, let them access the rest of the website!
-    require_once "../includes/header.php";
-?>
-
+    require_once "../includes/header.php";?>
     <main>
         <section class="landing">
-            <div class="flexRowContainer">
-                        <img src="..\assets\logo-dark.png" alt="Library logo">
-                        <h1>bejewel</h1>
+            <div class="container">
+                    <div class="flexRowContainer">
+                        <img src="..\assets\logo-dark-small.png" alt="Library logo">
+                        <h1>Meadow Library</h1>
                     </div>
-                    <h2>made with love, made to last.</h2>
-                    <p>Coming soon to Jervis Shopping Centre, Dublin. Until then, our ecommerce website is here to satisfy all your needs for handmade and delicate jewellery. Feel like a princess with our new "pearl & daizee" collection of rings and chokers.</p>
-                    <a href="shop.html" class="btn btn-default">Shop Now</a>        
+                    <h2>A Home For Every Growing Mind</h2>
+                    <p>Join us at Meadow Library, where we have a place for each reader. 
+                        We have an ever growing collection of books in several genres from horror to romance - 
+                        Take a look at our catalogue!
+                    </p>
+                    <a href="search.php" class="btn btn-default">Our Catalogue</a> 
+                    <a href="view_reserved.php" class="btn btn-default">Your Reserved Books</a> 
+                </div>
             </div>
         </section>
     </main>
-
 <?php
 }
 
-
-?>
-
-
-<?php require_once "../includes/footer.php";?>
+require_once "../includes/footer.php";?>
 
     <!--LINK IN BOOTSTRAP SCRIPTS-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -85,5 +75,5 @@ else {
 </body>
 </html>
 
-
+// Close the connection to the database
 <?php $conn->close();?>
