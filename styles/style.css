@@ -93,7 +93,7 @@ h1 {
 
 /*FOR LANDING PAGE IMAGE*/
 .landing {
-    background: url("/images/landscapeCollectionBackTransparent.jpg");
+    background: url("../assets/bg.png");
     background-color: var(--clr-gainsboro);
     background-repeat: no-repeat;
     background-position: center;
