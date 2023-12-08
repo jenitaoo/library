@@ -32,7 +32,7 @@ if ( isset($_POST['login-submit'])) {
             // If a matching record is found, set the "username" session variable and redirect to index.php
             if ($result->num_rows > 0) {
                 $_SESSION["username"] = $username;
-                $_SESSION["success"] = "Logged in.";
+                $_SESSION["success"] = "Success: Logged in.";
                 header('Location: index.php');
                 return;
             } else {

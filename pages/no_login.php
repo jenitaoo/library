@@ -9,7 +9,7 @@
                 <h2>A Home For Every Growing Mind</h2>
                 <p>Join us at Meadow Library, where we have a place for each reader. 
                     We have an ever growing collection of books in several genres from horror to romance - 
-                    Log in or register to access our services.
+                    <b>Please log in or register to access our services.<b>
                 </p>
                 <a href="login.php" class="btn btn-default">Log In</a> 
                 <a href="register.php" class="btn btn-default">Register</a> 

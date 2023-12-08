@@ -51,7 +51,7 @@ if (!isset($_SESSION["username"])) {
                         <h1>Meadow Library</h1>
                     </div>
                     <h2>A Home For Every Growing Mind</h2>
-                    <p>Join us at Meadow Library, where we have a place for each reader. 
+                    <p>JWe're happy to have you here! We've a place for every reader looking to grow their love for reading. 
                         We have an ever growing collection of books in several genres from horror to romance - 
                         Take a look at our catalogue!
                     </p>
