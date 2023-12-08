@@ -77,7 +77,7 @@ else {
                     ?>
                 </select>
 
-                <button name="search-submit">Search</button>
+                <button class="btn btn-default" name="search-submit">Search</button>
                 
             </form>
         </div>
@@ -139,7 +139,7 @@ if (isset($_POST["search-submit"])) {
                     <td>" . htmlentities($row["Reservation"]) . "</td>";
 
             if (htmlentities($row["Reservation"]) === "N") {
-                echo "<td><a href='reserve.php?id=" . $row["ISBN"] . "'>Reserve</a></td>
+                echo "<td><a class='link' href='reserve.php?id=" . $row["ISBN"] . "'>Reserve</a></td>
                 </tr>";
             }
         }

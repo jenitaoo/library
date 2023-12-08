@@ -65,7 +65,7 @@ else {
     WHERE `reservations`.`Username` = '$username'";
     $result = $conn->query($sql);
 
-    echo "<h1>View Your Reserved Books</h1>
+    echo "<div class='container'><h1>View Your Reserved Books</h1>
         <table style='border:1px solid black'>";
 
     // if there are rows in the table
@@ -93,12 +93,12 @@ else {
                     <td>" . htmlentities($row["Reservation"]) . "</td>";
 
             if ( htmlentities($row["Reservation"])==="Y"){
-                echo "<td><a href='unreserve.php?id=" . $row["ISBN"] . "'>Unreserve</a></td>
+                echo "<td><a class='link' href='unreserve.php?id=" . $row["ISBN"] . "'>Unreserve</a></td>
                 </tr>";
             }
         }
     
-        echo "</table></br>";
+        echo "</table></br></div>";
     }
 }
 

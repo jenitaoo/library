@@ -185,7 +185,10 @@ body tr:nth-child(odd) {
     height: 13px;
 }
 
-   
+/*LINK STYLES*/
+a.link {
+    color: var(--clr-wenge);
+}
 
 /*BUTTONS STYLES*/
 .btn-default {
@@ -205,90 +208,5 @@ body tr:nth-child(odd) {
     color:#ffffff;
     background-color: var(--clr-dark-mauve-taupe);
     border:0.1rem solid var(--clr-dark-mauve-taupe);
-}
-
-.primaryButton {
-    display:inline-block;
-    padding:0.35rem 1.2rem;
-    border:0.1rem solid var(--clr-mauve-taupe);
-    margin:0 0.3rem 0.3rem 0;
-    border-radius:0.12rem;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: #ffffff;
-    background-color: var(--clr-mauve-taupe);
-    transition: all 0.2s;
-}
-  
-.primaryButton:hover {
-    color:#ffffff;
-    background-color: var(--clr-dark-mauve-taupe);
-    border:0.1rem solid var(--clr-dark-mauve-taupe);
-}
-
-.secondaryButton {
-    padding:0.35rem 1.2rem;
-    border:0.1rem solid var(--clr-silver-pink);
-    margin:0 0.3rem 0.3rem 0;
-    border-radius:0.12rem;
-    text-decoration: none;
-    background-color: transparent;
-    color: var(--clr-silver-pink);
-    transition: all 0.2s;
-}
-
-.secondaryButton:hover {
-    color: #ffffff;
-    background-color: var(--clr-silver-pink);
-    border: 0.1rem solid var(--clr-silver-pink);
-}
-
-
-.tertiaryButton {
-    display:inline-block;
-    padding:0.35rem 1.2rem;
-    border: none;
-    margin:0 0.3rem 0.3rem 0;
-    border-radius:0.12rem;
-    box-sizing: border-box;
-    background-color: transparent;
-    text-decoration: underline;
-    color: var(--clr-mauve-taupe);
-    transition: all 0.2s;
-}
-
-.tertiaryButton:hover {
-    color: var(--clr-dark-mauve-taupe);
-}
-
-
-
-/*MEDIA QUERIES FOR RESPONSIVE DESIGN*/
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (min-width: 0) {
-    /*FOR BUTTONS*/
-    .primaryButton {
-      display:block;
-      margin:0.4em auto; 
-    }
-
-    .secondaryButton {
-      display:block;
-      margin:0.4em auto; 
-    }
-
-    .tertiaryButton {
-      display:block;
-      margin:0.4em auto; 
-    }
-
-    .productCards {
-        grid-template-columns: repeat(1, 12.5rem);
-    }
-
-    /*FOR CONTENT CONTAINER*/
-    .contentContainer {
-        padding: 2rem 2rem;
-    }
 }
 

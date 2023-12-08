@@ -109,11 +109,19 @@ else {
     require_once "../includes/header.php";
     // Display confirmation form for user to reserve this book
 ?>
-    <h1>Unreserve A Book</h1>
-    <form method="post">
-        <p>Are you sure you want to unreserve this book??</p>
-        <input type="submit" name="unreserve-submit" value="Confirm">
-    </form>
+    <main>
+    <section>
+        <div class="container">
+            <h1>Unreserve A Book</h1>
+            <form method="post">
+                <p>Are you sure you want to unreserve this book?</p>
+                <input class="btn btn-default" type="submit" name="unreserve-submit" value="Confirm">
+                <a class="btn btn-default" href="search.php">No, Go Back</a>
+            </form>
+        </div>
+        </br></br></br></br>
+    </section>
+</main>
 <?php
 
 }
