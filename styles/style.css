@@ -227,12 +227,10 @@ body tr:nth-child(odd) {
 }
 
 .secondaryButton {
-    display:inline-block;
     padding:0.35rem 1.2rem;
     border:0.1rem solid var(--clr-silver-pink);
     margin:0 0.3rem 0.3rem 0;
     border-radius:0.12rem;
-    box-sizing: border-box;
     text-decoration: none;
     background-color: transparent;
     color: var(--clr-silver-pink);

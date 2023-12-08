@@ -1,19 +1,15 @@
 <?php
+/**
+ * Search, View and Reserve Page
+ * 
+ * This page allows users to view the book records in the database,
+ * Search by partial title and/or author and/or category
+ * And reserve books
+ */
 session_start();
 
 require_once "../configs/config.php";
 
-// Check session for errors
-// Display success message if set
-if (isset($_SESSION["success"])) {
-    echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
-    unset($_SESSION["success"]);
-}
-// Display error message if set
-if (isset($_SESSION["error"])) {
-    echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
-    unset($_SESSION["error"]);
-}
 ?>
 
 <!DOCTYPE html>
@@ -45,46 +41,49 @@ if (isset($_SESSION["error"])) {
 // Check the session, if the user is not already logged in then provide a link to the login page
 if (!isset($_SESSION["username"])) { 
     // User not logged in
-    echo "Please <a href='login.php'>Log In</a> to start.";
+    require_once "no_login.php";
+    return;
 } // otherwise, they're logged in, show them the links to other pages
 else { 
     // User logged in
     require_once "../includes/header.php";
 }
 ?>
+<main>
+    <section>
+        <div class="container">
+            <h1>Search For Book</h1>
+            <form method="post" action="">
+                <input type="text" id="search" name="search" placeholder="Search Book Title">
+                <input type="text" id="search2" name="search2" placeholder="Search Author">
 
-<h1>Search For Book</h1>
-<div class="container">
-    <form method="post" action="">
-        <input type="text" id="search" name="search" placeholder="Search Book Title">
-        <input type="text" id="search2" name="search2" placeholder="Search Author">
+                <label for="category">Select Category:</label>
+                <select id="category" name="category">
+                    <option value="">All Categories</option>
+                    <?php
+                    // Fetch categories from the database
+                    $categoryQuery = "SELECT * FROM categories";
+                    $categoryResult = $conn->query($categoryQuery);
 
-        <label for="category">Select Category:</label>
-        <select id="category" name="category">
-            <option value="">All Categories</option>
-            <?php
-            // Fetch categories from the database
-            $categoryQuery = "SELECT * FROM categories";
-            $categoryResult = $conn->query($categoryQuery);
+                    // Check for errors in fetching categories
+                    if (!$categoryResult) {
+                        die("Error fetching categories: " . $conn->error);
+                    }
 
-            // Check for errors in fetching categories
-            if (!$categoryResult) {
-                die("Error fetching categories: " . $conn->error);
-            }
+                    // Display categories in the dropdown
+                    while ($categoryRow = $categoryResult->fetch_assoc()) {
+                        echo "<option value='" . htmlentities($categoryRow["CategoryID"]) . "'>" . htmlentities($categoryRow["CategoryDescription"]) . "</option>";
+                    }
+                    ?>
+                </select>
 
-            // Display categories in the dropdown
-            while ($categoryRow = $categoryResult->fetch_assoc()) {
-                echo "<option value='" . htmlentities($categoryRow["CategoryID"]) . "'>" . htmlentities($categoryRow["CategoryDescription"]) . "</option>";
-            }
+                <button name="search-submit">Search</button>
+                
+            </form>
+        </div>
+    </section>
+</main>
 
-            ?>
-        </select>
-
-        <button name="search-submit">Search</button>
-        
-    </form>
-    
-</div>
 
 <?php
 // If the search is submitted
@@ -110,9 +109,6 @@ if (isset($_POST["search-submit"])) {
     } elseif (!empty($category)) {
         $sql .= " AND `CategoryCode` LIKE '$category'";
     }
-    
- 
-
 
     $result = $conn->query($sql);
 
@@ -120,7 +116,7 @@ if (isset($_POST["search-submit"])) {
     if ($result->num_rows > 0) {
         // create table
 ?>
-        <table style='border:1px solid black'>
+        <table class="container table" style='border:1px solid black'>
         <tr>
             <th>ISBN</th>
             <th>Book Title</th>
@@ -148,10 +144,11 @@ if (isset($_POST["search-submit"])) {
             }
         }
 
-        echo "</table></br>";
+        echo "</table></br></br></br>";
     }
 }
 
+require_once "error_check.php";
 require_once "../includes/footer.php";
 ?>
 

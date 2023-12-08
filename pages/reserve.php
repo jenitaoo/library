@@ -9,19 +9,6 @@ session_start();
 
 require_once "..\configs\config.php";
 
-
-// Check session for errors
-// Display success message if set
-if (isset($_SESSION["success"])) {
-    echo('<p style="color:green">' . $_SESSION["success"] . "</p>\n");
-    unset($_SESSION["success"]);
-}
-// Display error message if set
-if (isset($_SESSION["error"])) {
-    echo('<p style="color:red">' . $_SESSION["error"] . "</p>\n");
-    unset($_SESSION["error"]);
-}
-
 // Check if reserve confirm form was submitted and 'id' is set in the URL
 if (isset($_POST['delete-submit'])) {
     // Check if ID is set
@@ -102,22 +89,30 @@ if (isset($_POST['delete-submit'])) {
 
 
 <?php
-
 // Check the session, if user is not already logged in then provide link to login page
 if (!isset($_SESSION["username"])) { 
     // User not logged in
-    echo "Please <a href='login.php'>Log In</a> to start.";
+    require "no_login.php";
+    return;
 } // otherwise they're logged in, show them the links to other pages
 else { 
     // User logged in
     require_once "../includes/header.php";
     // Display confirmation form for user to reserve this book
 ?>
-    <h1>Reserve A Book</h1>
-    <form method="post">
-        <p>Are you sure you want to reserve this book??</p>
-        <input type="submit" name="delete-submit" value="Confirm">
-    </form>
+<main>
+    <section>
+        <div class="container">
+        <h1>Reserve A Book</h1>
+        <form method="post">
+            <p>Are you sure you want to reserve this book??</p>
+            <input class="btn btn-default" type="submit" name="delete-submit" value="Confirm">
+            <a class="btn btn-default" href="search.php">No, Go Back</a>
+        </form>
+        </div>
+        </br></br></br></br>
+    </section>
+</main>
 <?php
 
 }
@@ -126,7 +121,10 @@ else {
 
 
 
-<?php require_once "../includes/footer.php";?>
+<?php 
+require_once "error_check.php";
+require_once "../includes/footer.php";
+?>
 
 </body>
 </html>
