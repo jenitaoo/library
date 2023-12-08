@@ -51,7 +51,8 @@ if (isset($_SESSION["error"])) {
 // Check the session, if user is not already logged in then provide link to login page
 if (!isset($_SESSION["username"])) { 
     // User not logged in
-    echo "Please <a href='login.php'>Log In</a> to start.";
+    require_once "no_login.php";
+    return;
 } // otherwise they're logged in, show them the links to other pages
 else { 
     // User logged in
@@ -102,10 +103,11 @@ else {
     }
 }
 
+
+// Check session for errors
+require_once "error_check.php";
+require_once "../includes/footer.php";
 ?>
-
-
-<?php require_once "../includes/footer.php";?>
 
 </body>
 </html>

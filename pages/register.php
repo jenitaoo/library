@@ -219,12 +219,12 @@ else {
     $_ERROR = $_SESSION["error"] = "You're already logged in to an account! <a href='logout.php'>Log out?</a>";
     header("Location: index.php");
 }
-
-?>
     
 
-
-<?php require_once "../includes/footer.php";?>
+// Check session for errors
+require_once "error_check.php";
+require_once "../includes/footer.php";
+?>
 
 
 </body>
